@@ -1,4 +1,4 @@
-import types
+from types import MethodType as FunctionRewrite
 from typing import Callable, List, Optional
 
 import torch
@@ -90,7 +90,7 @@ def split_gelu_forward(self, hidden_states: Tensor) -> Tensor:
 
 
 def split_gelu(module: Module) -> None:
-    module.forward = types.MethodType(split_gelu_forward, module)
+    module.forward = FunctionRewrite(split_gelu_forward, module)
 
 
 def cross_attn_forward_v1(self,
